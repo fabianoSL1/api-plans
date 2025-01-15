@@ -1,3 +1,4 @@
+import { NotFound } from '../../../shared/exceptions/notFound';
 import { CreateProductUseCase } from '../../application/use-cases/create-product';
 import { mockPlanRepository } from '../mocks/plan.mock';
 import {
@@ -22,6 +23,6 @@ describe('create product use case', () => {
 
     expect(() =>
       createProduct.execute('1', mockCreateProductRequest),
-    ).rejects.toThrow();
+    ).rejects.toBeInstanceOf(NotFound);
   });
 });
