@@ -67,7 +67,7 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s",
       "!**/*.mock.ts",
-      "!**/*.module.ts",
+      "!**/infra/**",
       "!**/main.ts"
     ],
     "coverageDirectory": "../coverage",
