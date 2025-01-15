@@ -8,14 +8,7 @@ describe('Get history use case', () => {
   let getHistory: GetPlanHistoryUseCase;
 
   beforeAll(() => {
-    mockProductRepository.listByPlan.mockResolvedValue({
-      page: {
-        current: 1,
-        size: 10,
-        total: 1,
-      },
-      results: [],
-    });
+    mockProductRepository.listByPlan.mockResolvedValue([[], 0]);
   });
 
   beforeEach(() => {
@@ -37,7 +30,7 @@ describe('Get history use case', () => {
     mockPlanRepository.get.mockResolvedValue(new Plan('plan', []));
     const result = await getHistory.execute('1', 1, 10);
 
-    expect(result.results).toBeDefined();
+    expect(result.products).toBeDefined();
     expect(result.page).toBeDefined();
   });
 });

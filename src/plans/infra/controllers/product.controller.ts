@@ -27,14 +27,19 @@ export class ProductController {
   @Get()
   async get(
     @Param('planId') planId: string,
-    @Query('page') page?: number,
-    @Query('size') size?: number,
+    @Query('page') page?: string,
+    @Query('size') size?: string,
   ) {
     const getHistory = new GetPlanHistoryUseCase(
       this.planRepository,
       this.productRepository,
     );
-    return getHistory.execute(planId, page ?? 1, size ?? 20);
+
+    return await getHistory.execute(
+      planId,
+      page ? parseInt(page) : 1,
+      size ? parseInt(size) : 20,
+    );
   }
 
   @Post()

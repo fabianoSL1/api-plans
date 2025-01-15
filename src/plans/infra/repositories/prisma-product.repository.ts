@@ -3,7 +3,6 @@ import { Product as ProductEntity } from '../../domain/entites/product.entity';
 import { ProductRepository } from '../../domain/repositories/product.repository';
 import { PrismaService } from '../../../shared/infra/prisma.service';
 import { Product } from '@prisma/client';
-import { Page } from '../../application/dto/page.dto';
 
 @Injectable()
 export class PrismaProductRepository implements ProductRepository {
@@ -13,10 +12,10 @@ export class PrismaProductRepository implements ProductRepository {
     planId: string,
     page: number,
     size: number,
-  ): Promise<Page<ProductEntity>> {
+  ): Promise<[ProductEntity[], number]> {
     const promiseList = this.prisma.product.findMany({
       where: { planId },
-      skip: page * size,
+      skip: (page - 1) * size,
       take: size,
     });
 
@@ -24,14 +23,7 @@ export class PrismaProductRepository implements ProductRepository {
 
     const [list, count] = await Promise.all([promiseList, promiseCount]);
 
-    return {
-      results: list.map((item) => this.parse(item)),
-      page: {
-        size,
-        current: page,
-        total: Math.ceil(count / size),
-      },
-    };
+    return [list.map((item) => this.parse(item)), count];
   }
 
   async get(productId: string): Promise<ProductEntity | null> {
