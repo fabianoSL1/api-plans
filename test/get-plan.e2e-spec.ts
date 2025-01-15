@@ -40,8 +40,6 @@ describe('GET /plans/:planId/products', () => {
       .get(`/plans/${plan.body.id}/products?page=${page}&size=${size}`)
       .send();
 
-    console.log(`/plans/${plan.body.id}/products?page=${page}&size=${size}`);
-
     expect(response.status).toBe(200);
 
     expect(response.body.products.length).toBe(size);
