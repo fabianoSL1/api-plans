@@ -1,5 +1,6 @@
 import { ProductRepository } from '../../domain/repositories/product.repository';
 import { NotFound } from '../../../shared/exceptions/notFound';
+import { InvalidInput } from '../../../shared/exceptions/invalidInput';
 
 export class RemoveProductUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
@@ -9,6 +10,10 @@ export class RemoveProductUseCase {
 
     if (!product) {
       throw new NotFound('produto não encontrado');
+    }
+
+    if (product.removedAt) {
+      throw new InvalidInput('produto já foi removido');
     }
 
     product.removedAt = new Date();
