@@ -7,7 +7,7 @@ export class Product {
     public readonly name: string,
     public readonly describe: string | null,
     public readonly registeredAt: Date,
-    public readonly removedAt: Date | null,
+    public removedAt: Date | null,
   ) {
     if (name === '') {
       throw new InvalidInput('nome do produto não pode ser vazio');
