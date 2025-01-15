@@ -1,5 +1,31 @@
+import { InvalidInput } from '../../../shared/exceptions/invalidInput';
+import { CreatePlanRequest } from '../../application/dto/create-plan.dto';
 import { CreatePlanUseCase } from '../../application/use-cases/create-plan';
-import { createCasesToError, mockPlanRepository } from '../mocks/plan.mock';
+import { mockPlanRepository } from '../mocks/plan.mock';
+
+const cases: [string, CreatePlanRequest][] = [
+  [
+    'when products is empty then throw',
+    {
+      name: 'plan',
+      products: [],
+    },
+  ],
+  [
+    'when plan name is blank then throw',
+    {
+      name: '',
+      products: [{ name: 'product' }],
+    },
+  ],
+  [
+    'when product name is blank then throw',
+    {
+      name: 'plan',
+      products: [{ name: '' }],
+    },
+  ],
+];
 
 describe('create plan use case', () => {
   let createPlan: CreatePlanUseCase;
@@ -9,7 +35,9 @@ describe('create plan use case', () => {
     createPlan = new CreatePlanUseCase(mockPlanRepository);
   });
 
-  it.each(createCasesToError)('%s', (_, input) => {
-    expect(() => createPlan.execute(input)).rejects.toThrow();
+  it.each(cases)('%s', (_, input) => {
+    expect(() => createPlan.execute(input)).rejects.toBeInstanceOf(
+      InvalidInput,
+    );
   });
 });
