@@ -13,8 +13,8 @@ describe('create plan use case', () => {
     createPlan = new CreatePlanUseCase(mockPlanRepository);
   });
 
-  it.each(createCasesToError)('%s', async (_, input) => {
-    expect(async () => await createPlan.execute(input)).rejects.toThrow();
+  it.each(createCasesToError)('%s', (_, input) => {
+    expect(() => createPlan.execute(input)).rejects.toThrow();
   });
 
   it('when given valid request then create plan', async () => {
