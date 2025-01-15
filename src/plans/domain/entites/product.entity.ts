@@ -16,6 +16,6 @@ export class Product {
   }
 
   isAvailable() {
-    return this.removedAt !== null;
+    return this.removedAt === null;
   }
 }
