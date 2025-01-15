@@ -3,7 +3,7 @@ import {
   createCasesToError,
   mockCreateRequest,
   mockPlanRepository,
-} from '../mocks/plan';
+} from '../mocks/plan.mock';
 
 describe('create plan use case', () => {
   let createPlan: CreatePlanUseCase;
