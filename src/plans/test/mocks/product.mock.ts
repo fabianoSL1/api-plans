@@ -4,6 +4,7 @@ import { ProductRepository } from '../../domain/repositories/product.repository'
 export const mockProductRepository: jest.Mocked<ProductRepository> = {
   save: jest.fn(),
   get: jest.fn(),
+  update: jest.fn(),
 };
 
 export const mockCreateProductRequest: CreateProductRequest = {
