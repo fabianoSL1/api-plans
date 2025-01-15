@@ -3,6 +3,7 @@ import { PlanRepository } from '../../domain/repositories/plan.repository';
 
 export const mockPlanRepository: jest.Mocked<PlanRepository> = {
   save: jest.fn(),
+  get: jest.fn(),
 };
 
 mockPlanRepository.save.mockImplementation(async (plan) => {
