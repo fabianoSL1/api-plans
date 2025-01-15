@@ -3,7 +3,7 @@ import { Product as ProductEntity } from '../../domain/entites/product.entity';
 import { ProductRepository } from '../../domain/repositories/product.repository';
 import { PrismaService } from '../../../shared/infra/prisma.service';
 import { Product } from '@prisma/client';
-import { Page } from '../../domain/repositories/page';
+import { Page } from '../../application/dto/page.dto';
 
 @Injectable()
 export class PrismaProductRepository implements ProductRepository {

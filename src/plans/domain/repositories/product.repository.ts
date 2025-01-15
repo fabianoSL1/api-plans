@@ -1,5 +1,5 @@
+import { Page } from '../../application/dto/page.dto';
 import { Product } from '../entites/product.entity';
-import { Page } from './page';
 
 export interface ProductRepository {
   listByPlan(
