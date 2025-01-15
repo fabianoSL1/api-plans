@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Plan {
-  id       String    @id @default(cuid())
+  id       String    @id @default(uuid())
   name     String
   products Product[]
 
