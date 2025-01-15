@@ -13,4 +13,8 @@ export class Product {
       throw new InvalidInput('nome do produto não pode ser vazio');
     }
   }
+
+  isAvailable() {
+    return this.removedAt !== null;
+  }
 }
