@@ -1,7 +1,6 @@
 import { NotFound } from '../../../shared/exceptions/notFound';
 import { GetPlanHistoryUseCase } from '../../application/use-cases/get-plan-history';
 import { Plan } from '../../domain/entites/plan.entity';
-import { Product } from '../../domain/entites/product.entity';
 import { mockPlanRepository } from '../mocks/plan.mock';
 import { mockProductRepository } from '../mocks/product.mock';
 
@@ -9,30 +8,14 @@ describe('Get history use case', () => {
   let getHistory: GetPlanHistoryUseCase;
 
   beforeAll(() => {
-    mockProductRepository.listByPlan.mockImplementation(
-      async (_, page, size) => {
-        const products = [];
-        for (let i = 0; i <= 100; i++) {
-          const product = new Product(
-            `product ${i + 1}`,
-            null,
-            new Date(),
-            null,
-          );
-          product.id = i.toString();
-          products.push(product);
-        }
-        const start = (page - 1) * size;
-        return {
-          results: products.slice(start, start + size),
-          page: {
-            current: page,
-            size: size,
-            total: Math.ceil(products.length / size),
-          },
-        };
+    mockProductRepository.listByPlan.mockResolvedValue({
+      page: {
+        current: 1,
+        size: 10,
+        total: 1,
       },
-    );
+      results: [],
+    });
   });
 
   beforeEach(() => {
