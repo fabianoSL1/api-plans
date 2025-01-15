@@ -19,7 +19,7 @@ export class CreatePlanUseCase {
       products.push(CreateProductUseCase.makeProduct(productRequest));
     }
 
-    const plan = new Plan({ name: request.name, products });
+    const plan = new Plan(request.name, products);
 
     return await this.planRepository.save(plan);
   }
