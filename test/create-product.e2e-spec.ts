@@ -4,7 +4,7 @@ import { Test } from '@nestjs/testing';
 import { PlanModule } from '../src/plans/infra/plan.module';
 import { CreateProductRequest } from '../src/plans/application/dto/create-product.dto';
 
-describe('Create product use case', () => {
+describe('POST /plans/:id/products', () => {
   let app: INestApplication;
   let planId: string;
 
@@ -21,7 +21,7 @@ describe('Create product use case', () => {
     app.close();
   });
 
-  it('POST /plans/:id/products', async () => {
+  it('when valid body then 200', async () => {
     const plan = await request(app.getHttpServer())
       .post('/plans')
       .send({
@@ -54,7 +54,7 @@ describe('Create product use case', () => {
     expect(response.body.removedAt).toBeUndefined();
   });
 
-  it('POST /plans/:id/products', async () => {
+  it('when without name then 400', async () => {
     const body: CreateProductRequest = {
       name: '',
       describe: 'nice',

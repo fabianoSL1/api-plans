@@ -28,7 +28,7 @@ const createPlanErrorCases: [string, CreatePlanRequest][] = [
   ],
 ];
 
-describe('Create plan use case', () => {
+describe('POST /plans', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -54,7 +54,7 @@ describe('Create plan use case', () => {
     expect(response.body.message.length).toBeGreaterThan(1);
   });
 
-  it('/POST plans', async () => {
+  it('when valid body then 200', async () => {
     const body: CreatePlanRequest = {
       name: 'plan',
       products: [

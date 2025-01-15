@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 import { PlanModule } from '../src/plans/infra/plan.module';
 import * as request from 'supertest';
 
-describe('Remove product use case', () => {
+describe('DELETE /posts/:planId/products/:productId', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -15,7 +15,7 @@ describe('Remove product use case', () => {
     await app.init();
   });
 
-  it('when valid input then remove product', async () => {
+  it('when found then 200', async () => {
     let plan = await request(app.getHttpServer())
       .post('/plans')
       .send({
@@ -67,7 +67,7 @@ describe('Remove product use case', () => {
     expect(response.body.message).toBeDefined();
   });
 
-  it('when remove twice then 400', async () => {
+  it('when remove with invalid planId then 400', async () => {
     const plan = await request(app.getHttpServer())
       .post('/plans')
       .send({
