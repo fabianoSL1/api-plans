@@ -1,0 +1,10 @@
+services:
+  database:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: plans
+    ports:
+      - 5432:5432

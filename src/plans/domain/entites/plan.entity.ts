@@ -2,7 +2,7 @@ import { InvalidInput } from '../../../shared/exceptions/invalidInput';
 import { Product } from './product.entity';
 
 export class Plan {
-  public readonly id!: string;
+  public id!: string;
 
   constructor(
     public readonly name: string,
