@@ -1,7 +1,7 @@
 import { Product } from './product.entity';
 
 export class Plan {
-  public readonly id?: string;
+  public readonly id!: string;
   public readonly name: string;
   public readonly products: Product[];
   constructor({

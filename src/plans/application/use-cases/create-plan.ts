@@ -1,4 +1,4 @@
-import { CreatePlanRequest } from '../dto/create-plan.dto';
+import { CreatePlanRequest, CreatePlanResponse } from '../dto/create-plan.dto';
 import { Plan } from '../../domain/entites/plan.entity';
 import { Product } from '../../domain/entites/product.entity';
 import { PlanRepository } from '../../domain/repositories/plan.repository';
@@ -6,17 +6,14 @@ import { PlanRepository } from '../../domain/repositories/plan.repository';
 export class CreatePlanUseCase {
   constructor(private readonly planRepository: PlanRepository) {}
 
-  async execute(request: CreatePlanRequest): Promise<Plan> {
+  async execute(request: CreatePlanRequest): Promise<CreatePlanResponse> {
     if (request.products.length == 0) {
       throw new Error('o plano deve ter pelo menos um produto');
     }
 
     const products = request.products.map((product) => new Product(product));
+    const plan = new Plan({ name: request.name, products });
 
-    let plan = new Plan({ name: request.name, products });
-
-    plan = await this.planRepository.save(plan);
-
-    return plan;
+    return await this.planRepository.save(plan);
   }
 }
