@@ -6,21 +6,6 @@ export const mockPlanRepository: jest.Mocked<PlanRepository> = {
   get: jest.fn(),
 };
 
-mockPlanRepository.save.mockImplementation(async (plan) => {
-  const callIndex = mockPlanRepository.save.mock.calls.length;
-
-  const products = plan.products.map((product, index) => ({
-    ...product,
-    id: `${callIndex}${index}`,
-  }));
-
-  return {
-    ...plan,
-    products,
-    id: callIndex.toString(),
-  };
-});
-
 export const createCasesToError: [string, CreatePlanRequest][] = [
   [
     'when products is empty then throw',

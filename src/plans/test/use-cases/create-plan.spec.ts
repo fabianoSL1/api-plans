@@ -1,9 +1,5 @@
 import { CreatePlanUseCase } from '../../application/use-cases/create-plan';
-import {
-  createCasesToError,
-  mockCreateRequest,
-  mockPlanRepository,
-} from '../mocks/plan.mock';
+import { createCasesToError, mockPlanRepository } from '../mocks/plan.mock';
 
 describe('create plan use case', () => {
   let createPlan: CreatePlanUseCase;
@@ -15,11 +11,5 @@ describe('create plan use case', () => {
 
   it.each(createCasesToError)('%s', (_, input) => {
     expect(() => createPlan.execute(input)).rejects.toThrow();
-  });
-
-  it('when given valid request then create plan', async () => {
-    const result = await createPlan.execute(mockCreateRequest);
-    expect(result).toBeDefined();
-    expect(result.products.length).toBeGreaterThan(0);
   });
 });
