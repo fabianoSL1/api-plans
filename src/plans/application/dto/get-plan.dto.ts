@@ -1,5 +1,4 @@
 import { Plan } from '../../domain/entites/plan.entity';
-import { Product } from '../../domain/entites/product.entity';
 
 export type GetPlanProduct = {
   id: string;
@@ -8,6 +7,5 @@ export type GetPlanProduct = {
 };
 
 export type GetPlanResponse = Omit<Plan, 'products'> & {
-  available_products: GetPlanProduct[];
-  history: Product[];
+  products: GetPlanProduct[];
 };

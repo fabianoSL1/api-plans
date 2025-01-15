@@ -1,5 +1,6 @@
 import { NotFound } from '../../../shared/exceptions/notFound';
 import { GetPlanUseCase } from '../../application/use-cases/get-plan';
+import { Product } from '../../domain/entites/product.entity';
 import { mockPlan, mockPlanRepository } from '../mocks/plan.mock';
 
 describe('', () => {
@@ -17,16 +18,13 @@ describe('', () => {
     mockPlanRepository.get.mockResolvedValueOnce(mockPlan);
     const plan = await getPlan.execute('1');
 
-    expect(plan.available_products).toBeDefined();
-    expect(plan.history).toBeDefined();
+    expect(plan.products).toBeDefined();
+    expect(plan.products.length).toBe(1);
 
-    const [history] = plan.history;
-    const available: typeof history = plan.available_products[0] as any;
+    const product: Product = plan.products[0] as any;
 
-    expect(history.registeredAt).toBeDefined();
-    expect(history.removedAt).toBeDefined();
-
-    expect(available.registeredAt).toBeUndefined();
-    expect(available.registeredAt).toBeUndefined();
+    expect(product.name).toBeDefined();
+    expect(product.registeredAt).toBeUndefined();
+    expect(product.registeredAt).toBeUndefined();
   });
 });

@@ -1,5 +1,4 @@
 import { NotFound } from '../../../shared/exceptions/notFound';
-import { Product } from '../../domain/entites/product.entity';
 import { PlanRepository } from '../../domain/repositories/plan.repository';
 import { GetPlanResponse, GetPlanProduct } from '../dto/get-plan.dto';
 
@@ -12,23 +11,20 @@ export class GetPlanUseCase {
     if (!plan) {
       throw new NotFound('plano não encontrado');
     }
-    const available_products: GetPlanProduct[] = [];
-    const history: Product[] = [];
+
+    const products: GetPlanProduct[] = [];
 
     for (const product of plan.products) {
-      if (!product.isAvailable()) {
+      if (product.isAvailable()) {
         const { id, name, describe } = product;
-        available_products.push({ id, name, describe });
-      } else {
-        history.push(product);
+        products.push({ id, name, describe });
       }
     }
 
     return {
       id: plan.id,
       name: plan.name,
-      available_products,
-      history,
+      products,
     };
   }
 }
