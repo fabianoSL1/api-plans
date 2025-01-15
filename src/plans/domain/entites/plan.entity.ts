@@ -1,3 +1,4 @@
+import { InvalidInput } from '../../../shared/exceptions/invalidInput';
 import { Product } from './product.entity';
 
 export class Plan {
@@ -14,7 +15,7 @@ export class Plan {
     products: Product[];
   }) {
     if (name === '') {
-      throw new Error('nome do plano não pode ser vazio');
+      throw new InvalidInput('nome do plano não pode ser vazio');
     }
 
     this.id = id;

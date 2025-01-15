@@ -5,6 +5,7 @@ import {
   CreateProductRequest,
   CreateProductResponse,
 } from '../dto/create-product.dto';
+import { NotFound } from '../../../shared/exceptions/notFound';
 
 export class CreateProductUseCase {
   constructor(
@@ -19,7 +20,7 @@ export class CreateProductUseCase {
     const plan = await this.planRepository.get(planId);
 
     if (!plan) {
-      throw new Error('plano não encontrado');
+      throw new NotFound('plano não encontrado');
     }
 
     const product = new Product(request);

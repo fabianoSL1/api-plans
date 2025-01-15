@@ -1,3 +1,5 @@
+import { InvalidInput } from '../../../shared/exceptions/invalidInput';
+
 export class Product {
   public readonly id!: string;
   public readonly name: string;
@@ -13,7 +15,7 @@ export class Product {
     describe?: string;
   }) {
     if (name === '') {
-      throw new Error('nome do produto não pode ser vazio');
+      throw new InvalidInput('nome do produto não pode ser vazio');
     }
 
     this.id = id;
