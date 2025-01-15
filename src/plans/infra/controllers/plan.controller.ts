@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Inject,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { PlanRepository } from '../../domain/repositories/plan.repository';
 import { GetPlanUseCase } from '../../application/use-cases/get-plan';
 import { CreatePlanRequest } from '../../application/dto/create-plan.dto';
@@ -18,6 +26,7 @@ export class PlanController {
   }
 
   @Post()
+  @HttpCode(201)
   async post(@Body() body: CreatePlanRequest) {
     const createPlan = new CreatePlanUseCase(this.planRepository);
 

@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  HttpCode,
+  Inject,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { CreateProductRequest } from '../../application/dto/create-product.dto';
 import { CreateProductUseCase } from '../../application/use-cases/create-product';
 import { RemoveProductUseCase } from '../../application/use-cases/remove-product';
@@ -14,6 +22,7 @@ export class ProductController {
   ) {}
 
   @Post()
+  @HttpCode(201)
   async post(
     @Param('planId') planId: string,
     @Body() body: CreateProductRequest,
@@ -27,6 +36,7 @@ export class ProductController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async destroy(@Param('planId') productId: string) {
     const removeProduct = new RemoveProductUseCase(this.productRepository);
 
