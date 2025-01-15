@@ -12,23 +12,39 @@ describe('Remove product use case', () => {
   });
 
   it('when not found then error', () => {
-    expect(() => removeProduct.execute('1')).rejects.toBeInstanceOf(NotFound);
+    mockProductRepository.get.mockResolvedValueOnce(null);
+    expect(() => removeProduct.execute('1', '1')).rejects.toBeInstanceOf(
+      NotFound,
+    );
+  });
+
+  it('when not found then error', () => {
+    const product = new Product('1', null, new Date(), new Date());
+    product.planId = '2';
+    mockProductRepository.get.mockResolvedValueOnce(product);
+
+    expect(() => removeProduct.execute('1', '1')).rejects.toBeInstanceOf(
+      NotFound,
+    );
   });
 
   it('when already removed then error', () => {
-    mockProductRepository.get.mockResolvedValue(
-      new Product('1', null, new Date(), new Date()),
-    );
+    const product = new Product('1', null, new Date(), new Date());
+    product.planId = '1';
+    mockProductRepository.get.mockResolvedValueOnce(product);
 
-    expect(() => removeProduct.execute('1')).rejects.toBeInstanceOf(
+    expect(() => removeProduct.execute('1', '1')).rejects.toBeInstanceOf(
       InvalidInput,
     );
   });
+
   it('when product then ok', async () => {
     const product = new Product('product', null, new Date(), null);
-    mockProductRepository.get.mockResolvedValue(product);
+    product.planId = '1';
 
-    await removeProduct.execute('1');
+    mockProductRepository.get.mockResolvedValueOnce(product);
+
+    await removeProduct.execute('1', '1');
 
     expect(product.removedAt).toBeInstanceOf(Date);
   });

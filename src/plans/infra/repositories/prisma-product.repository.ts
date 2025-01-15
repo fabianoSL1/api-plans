@@ -82,6 +82,7 @@ export class PrismaProductRepository implements ProductRepository {
       product.removedAt,
     );
     _product.id = product.id.toString();
+    _product.planId = product.planId;
     return _product;
   }
 }

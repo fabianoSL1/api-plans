@@ -64,6 +64,7 @@ export class PrismaPlanRepository implements PlanRepository {
       );
 
       _product.id = product.id.toString();
+      _product.planId = plan.id;
       _products.push(_product);
     }
 

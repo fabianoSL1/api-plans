@@ -53,9 +53,12 @@ export class ProductController {
 
   @Delete(':id')
   @HttpCode(204)
-  async destroy(@Param('planId') productId: string) {
+  async destroy(
+    @Param('id') productId: string,
+    @Param('planId') planId: string,
+  ) {
     const removeProduct = new RemoveProductUseCase(this.productRepository);
 
-    return await removeProduct.execute(productId);
+    return await removeProduct.execute(productId, planId);
   }
 }

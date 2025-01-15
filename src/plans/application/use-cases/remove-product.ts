@@ -5,10 +5,10 @@ import { InvalidInput } from '../../../shared/exceptions/invalidInput';
 export class RemoveProductUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
 
-  async execute(productId: string): Promise<void> {
+  async execute(productId: string, planId: string): Promise<void> {
     const product = await this.productRepository.get(productId);
 
-    if (!product) {
+    if (product === null || product.planId !== planId) {
       throw new NotFound('produto não encontrado');
     }
 

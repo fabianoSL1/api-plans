@@ -2,6 +2,7 @@ import { InvalidInput } from '../../../shared/exceptions/invalidInput';
 
 export class Product {
   public id!: string;
+  public planId!: string;
 
   constructor(
     public readonly name: string,
