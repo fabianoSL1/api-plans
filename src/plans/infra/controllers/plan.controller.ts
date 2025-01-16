@@ -3,6 +3,8 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Inject,
   Param,
   Post,
@@ -28,6 +30,20 @@ export class PlanController {
   @Post()
   @HttpCode(201)
   async post(@Body() body: CreatePlanRequest) {
+    if (!body.products) {
+      throw new HttpException(
+        "'products' é um campo obrigatório",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    if (!(body.products instanceof Array)) {
+      throw new HttpException(
+        "'products' deve ser um array",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const createPlan = new CreatePlanUseCase(this.planRepository);
 
     return await createPlan.execute(body);

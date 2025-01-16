@@ -35,7 +35,7 @@ export class GetPlanHistoryUseCase {
 
   private orderElements(products: Product[]) {
     return products.map(({ id, name, describe, registeredAt, removedAt }) => ({
-      id: isNaN(parseInt(id)) ? id : parseInt(id),
+      id,
       name,
       describe,
       registeredAt,

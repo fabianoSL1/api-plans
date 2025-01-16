@@ -4,6 +4,8 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Inject,
   Param,
   Post,
@@ -48,6 +50,13 @@ export class ProductController {
     @Param('planId') planId: string,
     @Body() body: CreateProductRequest,
   ) {
+    if (!body.name) {
+      throw new HttpException(
+        "'name' é um campo obrigatório",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const createProduct = new CreateProductUseCase(
       this.productRepository,
       this.planRepository,
