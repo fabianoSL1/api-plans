@@ -18,7 +18,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
 
     if (exception instanceof HttpException) {
       this.logger.log(
-        `[${exception.constructor.name}] '${exception.message}' ${exception.getStatus()} ${request.method} ${request.path}`,
+        `'${exception.message}' ${exception.getStatus()} ${request.method} ${request.path}`,
       );
 
       return response
@@ -26,6 +26,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
         .json({ message: exception.message });
     }
 
+    // Log de erro de todas as exceções que não foram mapeadas em custom ou não são HttpException
     this.logger.error(
       `${request.method} ${request.path} - stack: \n ${exception.stack}`,
     );

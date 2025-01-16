@@ -7,6 +7,9 @@ import {
 import { NextFunction, Request, Response } from 'express';
 import { JwtService } from '../../../auth/domain/services/jwt.service';
 
+/*
+ * Middleware responsavel por bloquear requisições com tokens invalidos
+ */
 export class AuthMiddleware implements NestMiddleware {
   constructor(@Inject('JwtService') private readonly jwtService: JwtService) {}
 
@@ -15,6 +18,7 @@ export class AuthMiddleware implements NestMiddleware {
     const token = this.getToken(authorization);
 
     if (!this.jwtService.validate(token)) {
+      // capturada por shared/infra/filter/general.filter.ts
       throw new HttpException('unauthorized', HttpStatus.UNAUTHORIZED);
     }
 

@@ -14,7 +14,7 @@ src/
     *module/
         application/  # contem os dtos e use cases
         domain/       # entidades e interfaces como de repositorios
-        infra/        # implementações das interfaces e controllers
+        infra/        # controllers e implementações das interfaces
         test/         # testes unitario
 ```
 
@@ -67,3 +67,27 @@ npm run test:e2e
 ## Endpoints:
 
 Os endpoints estão em [collection](./docs/api-collection.json), pode importar em ferramentas como [Postman](https://www.postman.com/) ou [hoppscotch](https://hoppscotch.io/).
+
+## Stack:
+
+###### app
+
+- Nest.js
+- TypeScript
+- Prisma
+
+###### tests
+
+- Jest
+- Supertest
+
+###### ambiente
+
+- Docker
+- Husky
+
+###### ferramentas
+
+- SonarQube
+- Render
+- Github Actions
