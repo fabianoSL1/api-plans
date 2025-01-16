@@ -23,10 +23,11 @@ export class CreateProductUseCase {
       throw new NotFound('plano não encontrado');
     }
 
-    const product = await this.productRepository.save(
-      CreateProductUseCase.makeProduct(request),
-      planId,
-    );
+    const product = CreateProductUseCase.makeProduct(request);
+    console.log(product);
+    product.planId = planId;
+    console.log(product);
+    await this.productRepository.save(product);
 
     return this.makeResponse(product);
   }

@@ -18,6 +18,6 @@ export class RemoveProductUseCase {
 
     product.removedAt = new Date();
 
-    await this.productRepository.update(product);
+    await this.productRepository.save(product);
   }
 }

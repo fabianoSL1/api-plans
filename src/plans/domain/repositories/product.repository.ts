@@ -7,6 +7,5 @@ export interface ProductRepository {
     size: number,
   ): Promise<[Product[], number]>;
   get(productId: string): Promise<Product | null>;
-  save(product: Product, planId: string): Promise<Product>;
-  update(product: Product): Promise<void>;
+  save(product: Product): Promise<void>;
 }

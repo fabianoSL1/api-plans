@@ -5,7 +5,6 @@ export const mockProductRepository: jest.Mocked<ProductRepository> = {
   listByPlan: jest.fn(),
   save: jest.fn(),
   get: jest.fn(),
-  update: jest.fn(),
 };
 
 export const mockCreateProductRequest: CreateProductRequest = {

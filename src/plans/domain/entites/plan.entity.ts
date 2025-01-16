@@ -5,8 +5,8 @@ export class Plan {
   public id!: string;
 
   constructor(
-    public readonly name: string,
-    public readonly products: Product[],
+    public name: string,
+    public products: Product[],
   ) {
     if (name === '') {
       throw new InvalidInput('nome do plano não pode ser vazio');
