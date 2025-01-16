@@ -68,7 +68,7 @@ npm run test:e2e
 
 ## Endpoints:
 
-Os endpoints estão em [collection](./docs/api-collection.json), pode importar em ferramentas como [Postman](https://www.postman.com/) ou [hoppscotch](https://hoppscotch.io/).
+Os endpoints estão em [collection](./docs/api-collection.json), que pode ser importado em ferramentas como [Postman](https://www.postman.com/) ou [hoppscotch](https://hoppscotch.io/).
 
 ## Stack:
 
