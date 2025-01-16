@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Product, Plan } from '@prisma/client';
 import { Plan as PlanEntity } from '../../domain/entites/plan.entity';
 import { PlanRepository } from '../../domain/repositories/plan.repository';
-import { PrismaService } from '../../../shared/infra/prisma.service';
+import { PrismaService } from '../../../shared/infra/services/prisma.service';
 import { Product as ProductEntity } from '../../domain/entites/product.entity';
 
 @Injectable()
