@@ -8,7 +8,7 @@ const SECRET = process.env.JWT_SECRET ?? 'secret';
 @Injectable()
 export class JwtServiceImpl implements JwtService {
   signIn(user: User, duration: number): string {
-    return jwt.sign(user, SECRET, { expiresIn: duration });
+    return jwt.sign({ name: user.name }, SECRET, { expiresIn: duration });
   }
 
   validate(token: string): boolean {

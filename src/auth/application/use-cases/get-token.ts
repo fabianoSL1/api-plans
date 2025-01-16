@@ -2,7 +2,7 @@ import { User } from '../../domain/entities/user.entity';
 import { UserRepository } from '../../domain/repositories/userRepositories';
 import { JwtService } from '../../domain/services/jwt.service';
 
-const TOKEN_DURATION = 8600;
+const TOKEN_DURATION = 60 * 15;
 
 export class AuthUseCase {
   constructor(
