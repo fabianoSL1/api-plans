@@ -4,6 +4,11 @@ import { JwtService } from '../../domain/services/jwt.service';
 
 const TOKEN_DURATION = 60 * 15;
 
+/*
+ * - Registra um usuario de acordo com o nome
+ * - gera token
+ * - atualiza lastAuth
+ */
 export class AuthUseCase {
   constructor(
     private readonly userRepository: UserRepository,

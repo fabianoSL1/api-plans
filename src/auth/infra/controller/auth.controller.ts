@@ -6,7 +6,7 @@ import {
   Inject,
   Post,
 } from '@nestjs/common';
-import { AuthUseCase } from '../../application/use-cases/get-token';
+import { AuthUseCase } from '../../application/use-cases/auth';
 import { UserRepository } from '../../domain/repositories/userRepositories';
 import { JwtService } from '../../domain/services/jwt.service';
 
