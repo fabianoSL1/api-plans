@@ -1,6 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter, Logger } from '@nestjs/common';
-import { InvalidInput } from '../exceptions/invalidInput';
-import { NotFound } from '../exceptions/notFound';
+import { InvalidInput } from '../../exceptions/invalidInput';
+import { NotFound } from '../../exceptions/notFound';
 import { Request } from 'express';
 
 @Catch(InvalidInput, NotFound)

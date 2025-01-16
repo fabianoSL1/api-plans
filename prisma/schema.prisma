@@ -34,3 +34,9 @@ model Product {
 
   @@map("products")
 }
+
+model User {
+  name         String   @unique
+  registeredAt DateTime
+  lastAuth     DateTime
+}
