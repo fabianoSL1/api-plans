@@ -18,6 +18,8 @@ src/
         test/         # testes unitario
 ```
 
+Para evoluir o projeto, poderiamos implementar cache caso a api tiver um grande volume de buscas. Além disso, poderiamos utilizar serviço de mensageria para processamento assíncrono por exemplo: quando registrar um novo produto em determinado plano, notificar todos os usuários do plano por email e telefone.
+
 ## Deploy:
 
 > [!WARNING]
