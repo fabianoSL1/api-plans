@@ -1,0 +1,183 @@
+[
+  {
+    "v": 6,
+    "name": "api-plans",
+    "folders": [],
+    "requests": [
+      {
+        "v": "11",
+        "name": "auth",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/auth",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"name\": \"test\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "plan",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/plans",
+        "params": [],
+        "headers": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInJlZ2lzdGVyZWRBdCI6IjIwMjUtMDEtMTZUMDM6MDU6MTUuMzA0WiIsImxhc3RBdXRoIjoiMjAyNS0wMS0xNlQwNDoxNjoxOS41MzNaIiwiaWF0IjoxNzM3MDAwOTc5LCJleHAiOjE3MzcwMDE4Nzl9.AgGpRsYNKGs3jznDime4Xewq8fzT_WfvghBTGZCI7aA",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"name\": \"plan\",\n  \"products\": [\n    {\n      \"name\": \"product\"\n    },\n    {\n      \"name\": \"product\",\n      \"describe\": \"describe\"\n    }\n  ]\n}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "plan",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/plans/4cb2444f-4a0e-4dfc-8981-09431435c68f",
+        "params": [],
+        "headers": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInJlZ2lzdGVyZWRBdCI6IjIwMjUtMDEtMTZUMDM6MDU6MTUuMzA0WiIsImxhc3RBdXRoIjoiMjAyNS0wMS0xNlQwNDoxNjoxOS41MzNaIiwiaWF0IjoxNzM3MDAwOTc5LCJleHAiOjE3MzcwMDE4Nzl9.AgGpRsYNKGs3jznDime4Xewq8fzT_WfvghBTGZCI7aA",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "products history",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/plans/4cb2444f-4a0e-4dfc-8981-09431435c68f/products",
+        "params": [
+          {
+            "key": "page",
+            "value": "1",
+            "active": true,
+            "description": ""
+          },
+          {
+            "key": "size",
+            "value": "20",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "headers": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInJlZ2lzdGVyZWRBdCI6IjIwMjUtMDEtMTZUMDM6MDU6MTUuMzA0WiIsImxhc3RBdXRoIjoiMjAyNS0wMS0xNlQwNDoxNjoxOS41MzNaIiwiaWF0IjoxNzM3MDAwOTc5LCJleHAiOjE3MzcwMDE4Nzl9.AgGpRsYNKGs3jznDime4Xewq8fzT_WfvghBTGZCI7aA",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "products",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/plans/4cb2444f-4a0e-4dfc-8981-09431435c68f/products",
+        "params": [],
+        "headers": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInJlZ2lzdGVyZWRBdCI6IjIwMjUtMDEtMTZUMDM6MDU6MTUuMzA0WiIsImxhc3RBdXRoIjoiMjAyNS0wMS0xNlQwNDoxNjoxOS41MzNaIiwiaWF0IjoxNzM3MDAwOTc5LCJleHAiOjE3MzcwMDE4Nzl9.AgGpRsYNKGs3jznDime4Xewq8fzT_WfvghBTGZCI7aA",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "remove products",
+        "method": "DELETE",
+        "endpoint": "http://localhost:3000/plans/4cb2444f-4a0e-4dfc-8981-09431435c68f/products/148",
+        "params": [],
+        "headers": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInJlZ2lzdGVyZWRBdCI6IjIwMjUtMDEtMTZUMDM6MDU6MTUuMzA0WiIsImxhc3RBdXRoIjoiMjAyNS0wMS0xNlQwNDoxNjoxOS41MzNaIiwiaWF0IjoxNzM3MDAwOTc5LCJleHAiOjE3MzcwMDE4Nzl9.AgGpRsYNKGs3jznDime4Xewq8fzT_WfvghBTGZCI7aA",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      }
+    ],
+    "auth": {
+      "authActive": true,
+      "authType": "none"
+    },
+    "headers": [],
+    "_ref_id": "coll_m5ytfrdz_00d892be-af55-4700-8ee4-3fe2dbb227c8"
+  }
+]
