@@ -22,12 +22,11 @@ export class AuthUseCase {
       user = new User(name);
       user.registeredAt = new Date();
     }
+    const token = this.JwtService.signIn(user, TOKEN_DURATION);
 
     user.lastAuth = new Date();
 
     await this.userRepository.save(user);
-
-    const token = this.JwtService.signIn(user, TOKEN_DURATION);
 
     return { duration: TOKEN_DURATION, token };
   }
