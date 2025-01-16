@@ -40,32 +40,6 @@ export class PrismaProductRepository implements ProductRepository {
     return this.parse(result);
   }
 
-  async save(product: ProductEntity, planId: string): Promise<ProductEntity> {
-    const result = await this.prisma.product.create({
-      data: {
-        name: product.name,
-        describe: product.describe,
-        registeredAt: product.registeredAt,
-        planId: planId,
-        available: product.isAvailable(),
-      },
-    });
-
-    return this.parse(result);
-  }
-
-  async update(product: ProductEntity): Promise<void> {
-    await this.prisma.product.update({
-      where: { id: parseInt(product.id) },
-      data: {
-        name: product.name,
-        describe: product.describe,
-        removedAt: product.removedAt,
-        available: product.isAvailable(),
-      },
-    });
-  }
-
   private parse(product: Product): ProductEntity {
     const _product = new ProductEntity(
       product.name,
@@ -76,5 +50,40 @@ export class PrismaProductRepository implements ProductRepository {
     _product.id = product.id.toString();
     _product.planId = product.planId;
     return _product;
+  }
+
+  async save(product: ProductEntity): Promise<void> {
+    if (product.id) {
+      await this.update(product);
+    } else {
+      await this.create(product);
+    }
+  }
+
+  private async update(product: ProductEntity): Promise<void> {
+    await this.prisma.product.update({
+      data: {
+        name: product.name,
+        describe: product.describe,
+        removedAt: product.removedAt,
+        available: product.isAvailable(),
+      },
+      where: {
+        id: parseInt(product.id),
+      },
+    });
+  }
+
+  private async create(product: ProductEntity): Promise<void> {
+    const stored = await this.prisma.product.create({
+      data: {
+        available: product.isAvailable(),
+        name: product.name,
+        planId: product.planId,
+        registeredAt: product.registeredAt,
+      },
+    });
+
+    product.id = stored.id.toString();
   }
 }

@@ -30,7 +30,7 @@ export class PrismaPlanRepository implements PlanRepository {
     return this.parse(plan, products);
   }
 
-  async save(plan: PlanEntity): Promise<PlanEntity> {
+  async save(plan: PlanEntity): Promise<void> {
     return await this.prisma.$transaction(async (tx) => {
       const resultPlans = await tx.plan.create({
         data: {
@@ -48,7 +48,11 @@ export class PrismaPlanRepository implements PlanRepository {
         })),
       });
 
-      return this.parse(resultPlans, resultProducts);
+      plan.id = resultPlans.id.toString();
+
+      const stored = this.parse(resultPlans, resultProducts);
+
+      plan.products = stored.products;
     });
   }
 
