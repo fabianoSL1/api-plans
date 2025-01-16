@@ -5,7 +5,7 @@ import { Request } from 'express';
 
 @Catch(InvalidInput, NotFound)
 export class CustomExceptionFilter implements ExceptionFilter {
-  private readonly logger = new Logger();
+  private readonly logger = new Logger(CustomExceptionFilter.name);
 
   catch(exception: InvalidInput | NotFound, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
