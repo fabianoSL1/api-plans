@@ -5,7 +5,7 @@
 
 Api restful para gerenciamento de planos e produtos.
 
-O projeto foi construido com base na arquitetura hexagonal, procurando manter a distancia entre o dominio e os detalhes de implementação:
+O projeto foi construído com base na arquitetura hexagonal, procurando manter a separação entre o domínio e os detalhes de implementação:
 
 ```shell
 src/
@@ -23,7 +23,7 @@ Para evoluir o projeto, poderiamos implementar cache caso a api tiver um grande 
 ## Deploy:
 
 > [!WARNING]
-> O [Render](https://render.com/) pode demorar até 50 segundos, apenas a primeira é lenta.
+> O [Render](https://render.com/) pode demorar até 50 segundos para iniciar, apenas a primeira requisição é lenta.
 
 https://api-plans-ryny.onrender.com
 
@@ -41,7 +41,7 @@ docker compose up
 ou
 
 ```shell
-# requisitos: Docker, Node.js lts/jod
+# requisitos: Docker e Node.js lts/jod
 npm install
 
 docker compose up -d database
@@ -56,7 +56,7 @@ npm run start:dev
 ## Testes:
 
 > [!TIP]
-> o banco de dados deve estar online durante os testes e2e
+> O banco de dados deve estar online durante os testes e2e.
 
 ```shell
 npm run test
