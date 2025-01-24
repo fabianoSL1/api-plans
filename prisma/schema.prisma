@@ -14,25 +14,34 @@ datasource db {
 }
 
 model Plan {
-  id       String    @id @default(uuid())
+  id       String            @id @default(uuid())
   name     String
-  products Product[]
+  products ProductsOnPlans[]
 
   @@map("plans")
 }
 
 model Product {
-  id           Int       @id @default(autoincrement())
-  name         String
-  describe     String?
-  registeredAt DateTime
-  removedAt    DateTime?
-  available    Boolean
+  id       Int     @id @default(autoincrement())
+  name     String  @unique
+  describe String?
 
-  plan   Plan   @relation(fields: [planId], references: [id])
-  planId String
+  plans ProductsOnPlans[]
 
   @@map("products")
+}
+
+model ProductsOnPlans {
+  planId       String
+  productId    Int
+  available    Boolean
+  registeredAt DateTime
+  removedAt    DateTime?
+  plan         Plan      @relation(fields: [planId], references: [id])
+  product      Product   @relation(fields: [productId], references: [id])
+
+  @@id([planId, productId])
+  @@map("products_history")
 }
 
 model User {
