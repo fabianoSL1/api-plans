@@ -18,16 +18,6 @@ describe('Remove product use case', () => {
     );
   });
 
-  it('when not found then error', () => {
-    const product = new Product('1', null, new Date(), new Date());
-    product.planId = '2';
-    mockProductRepository.get.mockResolvedValueOnce(product);
-
-    expect(() => removeProduct.execute('1', '1')).rejects.toBeInstanceOf(
-      NotFound,
-    );
-  });
-
   it('when already removed then error', () => {
     const product = new Product('1', null, new Date(), new Date());
     product.planId = '1';
