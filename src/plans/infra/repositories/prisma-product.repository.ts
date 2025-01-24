@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Product as ProductEntity } from '../../domain/entites/product.entity';
 import { ProductRepository } from '../../domain/repositories/product.repository';
 import { PrismaService } from '../../../shared/infra/services/prisma.service';
-import { Product } from '@prisma/client';
+import { Product, ProductsOnPlans } from '@prisma/client';
+
+type Relational = ProductsOnPlans & { product: Product };
 
 @Injectable()
 export class PrismaProductRepository implements ProductRepository {
@@ -13,23 +15,32 @@ export class PrismaProductRepository implements ProductRepository {
     page: number,
     size: number,
   ): Promise<[ProductEntity[], number]> {
-    const promiseList = this.prisma.product.findMany({
+    const promiseList = this.prisma.productsOnPlans.findMany({
       where: { planId },
+      include: {
+        product: true,
+      },
       skip: (page - 1) * size,
       take: size,
     });
 
-    const promiseCount = this.prisma.product.count({ where: { planId } });
+    const promiseCount = this.prisma.productsOnPlans.count({
+      where: { planId },
+    });
 
     const [list, count] = await Promise.all([promiseList, promiseCount]);
 
     return [list.map((item) => this.parse(item)), count];
   }
 
-  async get(productId: string): Promise<ProductEntity | null> {
-    const result = await this.prisma.product.findFirst({
+  async get(productId: string, planId: string): Promise<ProductEntity | null> {
+    const result = await this.prisma.productsOnPlans.findFirst({
       where: {
-        id: parseInt(productId),
+        productId: parseInt(productId),
+        planId: planId,
+      },
+      include: {
+        product: true,
       },
     });
 
@@ -40,15 +51,15 @@ export class PrismaProductRepository implements ProductRepository {
     return this.parse(result);
   }
 
-  private parse(product: Product): ProductEntity {
+  private parse(relation: Relational): ProductEntity {
     const _product = new ProductEntity(
-      product.name,
-      product.describe,
-      product.registeredAt,
-      product.removedAt,
+      relation.product.name,
+      relation.product.describe,
+      relation.registeredAt,
+      relation.removedAt,
     );
-    _product.id = product.id.toString();
-    _product.planId = product.planId;
+    _product.id = relation.product.id.toString();
+    _product.planId = relation.planId;
     return _product;
   }
 
@@ -65,8 +76,20 @@ export class PrismaProductRepository implements ProductRepository {
       data: {
         name: product.name,
         describe: product.describe,
-        removedAt: product.removedAt,
-        available: product.isAvailable(),
+        plans: {
+          update: {
+            where: {
+              planId_productId: {
+                planId: product.planId,
+                productId: parseInt(product.id),
+              },
+            },
+            data: {
+              available: product.isAvailable(),
+              removedAt: product.removedAt,
+            },
+          },
+        },
       },
       where: {
         id: parseInt(product.id),
@@ -75,15 +98,29 @@ export class PrismaProductRepository implements ProductRepository {
   }
 
   private async create(product: ProductEntity): Promise<void> {
-    const stored = await this.prisma.product.create({
+    const stored = await this.prisma.productsOnPlans.create({
       data: {
+        product: {
+          connectOrCreate: {
+            create: {
+              name: product.name,
+              describe: product.describe,
+            },
+            where: {
+              name: product.name,
+            },
+          },
+        },
         available: product.isAvailable(),
-        name: product.name,
-        planId: product.planId,
+        plan: {
+          connect: {
+            id: product.planId,
+          },
+        },
         registeredAt: product.registeredAt,
       },
     });
 
-    product.id = stored.id.toString();
+    product.id = stored.productId.toString();
   }
 }

@@ -6,9 +6,9 @@ export class RemoveProductUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
 
   async execute(productId: string, planId: string): Promise<void> {
-    const product = await this.productRepository.get(productId);
+    const product = await this.productRepository.get(productId, planId);
 
-    if (product === null || product.planId !== planId) {
+    if (product === null) {
       throw new NotFound('produto não encontrado');
     }
 

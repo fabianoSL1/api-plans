@@ -6,6 +6,6 @@ export interface ProductRepository {
     page: number,
     size: number,
   ): Promise<[Product[], number]>;
-  get(productId: string): Promise<Product | null>;
+  get(productId: string, planId: string): Promise<Product | null>;
   save(product: Product): Promise<void>;
 }

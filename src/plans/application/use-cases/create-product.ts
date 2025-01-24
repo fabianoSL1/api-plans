@@ -24,9 +24,9 @@ export class CreateProductUseCase {
     }
 
     const product = CreateProductUseCase.makeProduct(request);
-    console.log(product);
+
     product.planId = planId;
-    console.log(product);
+
     await this.productRepository.save(product);
 
     return this.makeResponse(product);
