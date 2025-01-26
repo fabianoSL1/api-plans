@@ -25,6 +25,13 @@ const cases: [string, CreatePlanRequest][] = [
       products: [{ name: '' }],
     },
   ],
+  [
+    'when product twice then throw',
+    {
+      name: 'plan',
+      products: [{ name: 'product' }, { name: 'product' }],
+    },
+  ],
 ];
 
 describe('create plan use case', () => {

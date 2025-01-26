@@ -13,13 +13,22 @@ export class CreatePlanUseCase {
       throw new InvalidInput('o plano deve ter pelo menos um produto');
     }
 
-    const products: Product[] = [];
+    const products: Map<string, Product> = new Map();
 
     for (const productRequest of request.products) {
-      products.push(CreateProductUseCase.makeProduct(productRequest));
+      if (products.has(productRequest.name)) {
+        throw new InvalidInput(
+          `O produto '${productRequest.name}' foi inserido duas vezes`,
+        );
+      }
+
+      products.set(
+        productRequest.name,
+        CreateProductUseCase.makeProduct(productRequest),
+      );
     }
 
-    const plan = new Plan(request.name, products);
+    const plan = new Plan(request.name, Array.from(products.values()));
 
     await this.planRepository.save(plan);
 
