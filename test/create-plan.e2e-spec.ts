@@ -26,6 +26,13 @@ const createPlanErrorCases: [string, CreatePlanRequest][] = [
       products: [{ name: '' }],
     },
   ],
+  [
+    'when product twice then 400',
+    {
+      name: 'plan',
+      products: [{ name: 'product' }, { name: 'product' }],
+    },
+  ],
 ];
 
 describe('POST /plans', () => {
@@ -44,7 +51,7 @@ describe('POST /plans', () => {
     app.close();
   });
 
-  it.each(createPlanErrorCases)('/', async (_, body) => {
+  it.each(createPlanErrorCases)('%s', async (_, body) => {
     const response = await request(app.getHttpServer())
       .post('/plans')
       .send(body);
